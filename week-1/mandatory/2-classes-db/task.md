@@ -8,6 +8,81 @@ To submit this homework write the correct commands for each question here:
 
 ```sql
 
+drop table if exists mentors;
+
+CREATE TABLE mentors (
+  id               SERIAL PRIMARY KEY,
+  name             VARCHAR (30)NOT NULL,
+  city_years       INT,
+  tech_skills      VARCHAR (30),
+  address          VARCHAR (30)
+);
+
+INSERT INTO mentors (name, city_years, tech_skills, address) VALUES ('John Smith', 10,'javascript', '11 New Road, Glasgow');
+INSERT INTO mentors (name, city_years, tech_skills, address) VALUES ('Sue Jones', 5, 'python', '120 Old Street, Glasgow');
+INSERT INTO mentors (name, city_years, tech_skills, address) VALUES ('Alice Evans', 8, 'php', '3 High Road, Glasgow');
+INSERT INTO mentors (name, city_years, tech_skills, address) VALUES ('Steven King', 10, 'postgresql', '19 Bed Street, Glasgow');
+INSERT INTO mentors (name, city_years, tech_skills, address) VALUES ('Becky Brown', 1, 'postgresql', '12, rue des Bouchers, Glasgow');
+
+CREATE TABLE students (
+  id        		SERIAL PRIMARY KEY,
+  name      		VARCHAR(30) NOT NULL,
+  address   		VARCHAR(30),
+  graduated_cyf     Boolean not NULL
+);
+
+
+INSERT INTO students (name, address, graduated_cyf) VALUES ('Alfonso', 'Castillejos 382', TRUE);
+INSERT INTO students (name, address, graduated_cyf) VALUES ('Pedro', 'New Road 13', FALSE);
+INSERT INTO students (name, address, graduated_cyf) VALUES ('Arthur', 'Good Road 12', FALSE);
+INSERT INTO students (name, address, graduated_cyf) VALUES ('Sara', 'Parallel 12', TRUE);
+INSERT INTO students (name, address, graduated_cyf) VALUES ('Zaquiel', 'Oxford Road 1', TRUE);
+INSERT INTO students (name, address, graduated_cyf) VALUES ('Isaac', 'Rutherford Street', FALSE);
+INSERT INTO students (name, address, graduated_cyf) VALUES ('Claudia', 'Calle Valecia', FALSE);
+INSERT INTO students (name, address, graduated_cyf) VALUES ('Marta', 'Calle Madrid 13', TRUE);
+INSERT INTO students (name, address, graduated_cyf) VALUES ('Juan', 'New York Street', TRUE);
+INSERT INTO students (name, address, graduated_cyf) VALUES ('Alberto', 'Calle del Rey', FALSE);
+
+select * from students where graduated_cyf = false;
+
+CREATE TABLE classes (
+  id        		SERIAL PRIMARY KEY,
+  leading_mentor    INT references mentors (id),
+  topic   		    VARCHAR(30),
+  date 			    DATE NOT NULL,
+  location          VARCHAR(30)
+);
+
+INSERT INTO Classes (leading_mentor, topic, date, location) VALUES ('1', 'Javascript', '2020-10-01', 'Barcelona');
+INSERT INTO Classes (leading_mentor, topic, date, location) VALUES ('2', 'PHP', '2020-11-22', 'Badalona');
+INSERT INTO Classes (leading_mentor, topic, date, location) VALUES ('3', 'SQL', '2020-08-19', 'Terrassa');
+INSERT INTO Classes (leading_mentor, topic, date, location) VALUES ('4', 'PASCAL', '2020-06-18', 'Sant Boi');
+
+
+CREATE TABLE stud_classes (
+  id        		SERIAL PRIMARY KEY,
+  student   		INT references students (id),
+  topic				INT references classes (id)
+);
+
+INSERT INTO stud_classes (student, topic) VALUES ('1', '1');
+INSERT INTO stud_classes (student, topic) VALUES ('2', '1');
+INSERT INTO stud_classes (student, topic) VALUES ('3', '2');
+INSERT INTO stud_classes (student, topic) VALUES ('4', '2');
+INSERT INTO stud_classes (student, topic) VALUES ('5', '3');
+INSERT INTO stud_classes (student, topic) VALUES ('6', '3');
+INSERT INTO stud_classes (student, topic) VALUES ('7', '4');
+INSERT INTO stud_classes (student, topic) VALUES ('8', '4');
+
+select * from mentors where city_years > 5;
+
+select * from mentors where tech_skills = 'javascript';
+
+select * from students where graduated_cyf = true;
+
+select * from classes where date < '2020-11-01';
+
+select * from stud_classes where topic = '1';
 
 ```
 
