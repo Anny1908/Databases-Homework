@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const { Pool } = require('pg');
+const port = 9000;
 
 const pool = new Pool({
     user: 'postgres',
@@ -28,6 +29,6 @@ app.get("/products", function(req, res) {
     });
 });
 
-app.listen(8888, function() {
-    console.log("Server is listening on port 8888. Ready to accept requests!");
+app.listen(port, function() {
+    console.log("Server is listening on port. " + port + " Ready to accept requests!");
 });
